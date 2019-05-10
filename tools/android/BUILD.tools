@@ -121,7 +121,7 @@ sh_binary(
         ":desugared_java8_legacy_libs",
         ":dexer",
         "@bazel_tools//src/tools/android/java/com/google/devtools/build/android/desugar/scan:KeepScanner",
-        "@bazel_tools//third_party/java/proguard",
+        "@bazel_tools//tools/jdk:proguard",
     ],
     visibility = ["//visibility:public"],
 )

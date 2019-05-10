@@ -17,6 +17,7 @@ load(
     "//tools/jdk:remote_java_tools_aliases.bzl",
     "remote_java_tools_filegroup",
     "remote_java_tools_java_import",
+    "remote_java_tools_java_binary",
 )
 
 package(default_visibility = ["//visibility:public"])
@@ -247,9 +248,20 @@ remote_java_tools_java_import(
     target = ":java_tools/ExperimentalRunner_deploy.jar",
 )
 
-remote_java_tools_filegroup(
-    name = "ExperimentalRunner_deploy.jar",
+remote_java_tools_java_import(
+    name = "ExperimentalTestRunner",
     target = ":java_tools/ExperimentalRunner_deploy.jar",
+)
+
+alias(
+    name = "proguard",
+    actual = select({
+         "//src/conditions:darwin": "@remote_java_tools_darwin//:proguard",
+        "//src/conditions:darwin_x86_64": "@remote_java_tools_darwin//:proguard",
+        "//src/conditions:windows": "@remote_java_tools_windows//:proguard",
+        "//src/conditions:linux_x86_64": "@remote_java_tools_linux//:proguard",
+        "//conditions:default": "@remote_java_tools_linux//:proguard",
+    }),
 )
 
 BOOTCLASS_JARS = [

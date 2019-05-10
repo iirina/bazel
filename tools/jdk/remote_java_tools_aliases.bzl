@@ -39,3 +39,7 @@ def remote_java_tools_filegroup(name, target, **kwargs):
 def remote_java_tools_java_import(name, target, **kwargs):
     args = _get_args(target, "jars", **kwargs)
     native.java_import(name = name, **args)
+
+def remote_java_tools_java_import(name, target, **kwargs):
+    args = _get_args(target, "jars", **kwargs)
+    native.java_import(name = name, **args)
